@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background-image: url("/images/photo-1637356216542-0d0a4e93f992.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.heroContent h1 {
+  font: 60px "Kleopatra-regular", "papyrus", "fantasy";
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.heroContent p {
+  font: 18px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #f5f0e4;
+  line-height: 1.6;
+}
+
+body {
+  background: #f5f0e4;
+  height: 100vh;
+}
+
+.second {
+  padding: 0;
+  max-width: 1400px;
+  text-align: center;
+  margin-bottom: 48px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  width: 48rem;
+  line-height: 24px;
+}
+
+.second h2 {
+  color: #1e422d;
+  font-family: "aniron", "tajan pro", serif;
+  font-weight: normal;
+  font-size: 20px;
+  margin: 0 0 24px;
+}
+
+.second p {
+  color: grey;
+  margin: 0 0 16px;
+}
+
+.missionCardsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 24px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.missionCardsContainer .card {
+  flex: 0 0 260px;
+  width: 260px;
+  min-height: 160px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.missionCardsContainer .card:hover {
+  transform: translateY(-6px);
+}
+
+@media (max-width: 1100px) {
+  .missionCardsContainer {
+    justify-content: center;
+    gap: 18px;
+    padding: 0 12px;
+  }
+
+  .missionCardsContainer .card {
+    flex: 0 0 220px;
+    width: 220px;
+  }
+}
+
+@media (max-width: 700px) {
+  .missionCardsContainer .card {
+    flex: 0 0 48%;
+    width: 48%;
+  }
+}
+
+@media (max-width: 420px) {
+  .missionCardsContainer .card {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-sizing: border-box;
+  padding: 25px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.circle {
+  color: rgb(255, 176, 0);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(255, 203, 164, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 16px;
+}
+
+.card div {
+  font: 30px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #1a5245;
+  margin-bottom: 8px;
+  padding: 24px;
+}
+
+.card h4 {
+  font: 16px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #1a5245;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font: 15px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #5a6b65;
+  line-height: 1.5;
+}
+
+.ancient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  padding: 80px 120px;
+}
+
+.text {
+  flex: 1 1 55%;
+  font: 17px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #5a6b65;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.image {
+  flex: 1 1 45%;
+  text-align: right;
+}
+
+.image img {
+  width: 600px;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.text h2 {
+  font: 16px "aniron", "tajan pro", serif;
+  color: #1a5245;
+  margin: 0 0 24px;
+}
+
+.journey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 120px auto 80px;
+  gap: 48px;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 160px;
+}
+
+.right {
+  background-color: white;
+  color: #1e422d;
+  border: 1px solid rgba(26, 82, 69, 0.15);
+  border-radius: 14px;
+  padding: 12px 20px;
+  flex: 1;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin-top: 40px;
+}
+
+.header h2 {
+  font: 24px "aniron", "tajan pro", serif;
+  color: #1a5245;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.header p {
+  font: 16px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #5a6b65;
+  max-width: 700px;
+  margin: 0 auto 16px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.right h3 {
+  font: 18px "aniron", "tajan pro", serif;
+  font-weight: bold;
+  color: #174e39;
+  margin-bottom: 8px;
+}
+
+.right p {
+  font: 16px "Goudy Bookletter 1911", "goudy old style", serif;
+  color: #4a5d55;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 24px;
+  gap: 60px;
+}
+
+.row .circle {
+  font: 14px "Goudy Bookletter 1911", "goudy old style", serif;
+  letter-spacing: 1px;
+  width: 70px;
+  height: 70px;
+  background-color: #ffb000;
+  color: #1a5245;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+}
+
+.collections {
+  text-align: center;
+  margin: 0 auto 80px;
+  max-width: 1400px;
+}
+
+.collections h2 {
+  font: 20px "aniron", "tajan pro", serif;
+  color: #1a5245;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #5a6b65;
+  font: 16px "Goudy Bookletter 1911", "goudy old style", serif;
+  max-width: 700px;
+  margin: 0 auto 32px;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 0 60px;
+}
+
+.cardsContainer .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #fff;
+  width: 400px;
+  border-radius: 16px;
+  padding: 18px 20px;
+  text-align: left;
+  transition: transform 0.3s ease;
+  min-height: 460px;
+}
+
+.card h3 {
+  font: 18px "aniron", "tajan pro", serif;
+  color: #1a5245;
+  margin-bottom: 16px;
+}
+
+.card p {
+  font: 16px "Goudy Bookletter 1911", "goudy old style", serif;
+  line-height: 1.5;
+  color: #5a6b65;
+  margin-bottom: 16px;
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .ancient {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .journey {
+    padding: 0 20px;
+  }
+
+  .cardsContainer {
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cardsContainer .card {
+    width: 100%;
+    max-width: 400px;
+  }
+}

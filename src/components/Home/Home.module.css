@@ -1,0 +1,316 @@
+:root {
+  --egyptian-green: #1a5245;
+  --egyptian-gold: #ffb000;
+  --egyptian-cream: #f5f0e4;
+  --font-kleopatra: "Kleopatra-regular", fantasy;
+  --font-goudy: "Goudy Bookletter 1911", serif;
+  --font-aniron: "Aniron", serif;
+  --background: #f5f0e4;
+  --muted-foreground: #5a6b65;
+}
+
+.homePage {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  font-family: var(--font-goudy);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.hero {
+  position: relative;
+  height: 70vh;
+  width: 100%;
+  background-image: url('/images/photo-1637356216542-0d0a4e93f992.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  width: 100%;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroTitle {
+  font: 60px var(--font-kleopatra);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  text-align: center;
+}
+
+.heroSubtitle {
+  font: 18px var(--font-goudy);
+  color: #f5f0e4;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  text-align: center;
+  max-width: 600px;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.btnBook {
+  background: #1a5245;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-aniron);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btnBook:hover {
+  background: #174e39;
+  transform: translateY(-2px);
+}
+
+.btnExplore {
+  background: #ffb000;
+  color: #1a5245;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-aniron);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btnExplore:hover {
+  background: #e69a00;
+  transform: translateY(-2px);
+}
+
+.btnLearn {
+  background: #2a6b5e;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-aniron);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btnLearn:hover {
+  background: #1e422d;
+  transform: translateY(-2px);
+}
+
+.btnTour {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-aniron);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btnTour:hover {
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.btnPlan {
+  background: #9b59b6;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-aniron);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btnPlan:hover {
+  background: #8e44ad;
+  transform: translateY(-2px);
+}
+
+.collectionsSection {
+  padding: 80px 0;
+  background: var(--background);
+  width: 100%;
+}
+
+.sectionTitle {
+  font: 24px var(--font-aniron);
+  color: var(--egyptian-green);
+  text-align: center;
+  margin-bottom: 48px;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  width: 100%;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardImg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 20px;
+  width: 100%;
+}
+
+.cardTitle {
+  font: 18px var(--font-aniron);
+  color: var(--egyptian-green);
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.cardText {
+  font: 16px var(--font-goudy);
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  width: 100%;
+}
+
+.monumentSection {
+  padding: 80px 0;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100%;
+}
+
+.monumentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.textSide {
+  padding: 20px;
+  width: 100%;
+}
+
+.textSide p {
+  font: 16px var(--font-goudy);
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.imageSide img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .btnBook,
+  .btnExplore,
+  .btnLearn,
+  .btnTour,
+  .btnPlan {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .monumentGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTitle {
+    font-size: 40px;
+  }
+
+  .container {
+    padding: 0 5px;
+  }
+}

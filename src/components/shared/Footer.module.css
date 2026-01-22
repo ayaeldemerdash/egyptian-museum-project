@@ -1,0 +1,11 @@
+.footer { 
+  background: var(--egyptian-green); 
+  color: var(--egyptian-cream); 
+  padding: 48px 0 24px; 
+  border-top: 1px solid var(--egyptian-gold)/30; 
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-bottom: 32px; }
+.footerTitle { color: var(--egyptian-gold); font-family: var(--font-aniron); margin-bottom: 16px; }
+.bottom { padding-top: 32px; border-top: 1px solid var(--egyptian-gold)/30; text-align: center; font-size: 14px; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }

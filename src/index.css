@@ -1,0 +1,53 @@
+/* Fonts من Google + Local */
+@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');
+@import url('https://fonts.cdnfonts.com/css/kleopatra');
+@import url('https://fonts.cdnfonts.com/css/greek-freak');
+@import url('https://fonts.cdnfonts.com/css/aniron');
+
+@font-face {
+  font-family: 'Kleopatra-regular';
+  src: url('/fonts/Kleopatra-Regular Demo.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Aniron';
+  src: url('/fonts/anirb___.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Aniron';
+  src: url('/fonts/anirm___.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Greek-Freak';
+  src: url('/fonts/Greek-Freak.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'GoudyBookletter1911';
+  src: url('/fonts/GoudyBookletter1911-Regular.ttf') format('truetype');
+}
+
+/* Variables من Home.css */
+:root {
+  --egyptian-green: #1a5245;
+  --egyptian-cream: #f5f0e4;
+  --egyptian-gold: #ffb000;
+  --egyptian-peach: #ffcba4;
+  --font-kleopatra: "Kleopatra", "Papyrus", fantasy;
+  --font-goudy: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  --font-aniron: "Aniron", "Trajan Pro", serif;
+  /* باقي الـ variables... */
+}
+
+body {
+  padding-top: 60px;
+  background: var(--egyptian-cream);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-goudy);
+}
+
+/* Reset عام */
+* {
+  box-sizing: border-box;
+}
