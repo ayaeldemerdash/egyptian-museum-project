@@ -1,5 +1,7 @@
 .navbar {
-  background: #f5f0e4;
+  background: rgba(245, 240, 228, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #1a5245;
   padding: 1rem 0;
   position: fixed;
@@ -19,12 +21,46 @@
   align-items: center;
 }
 
-.logo {
-  font-family: var(--font-kleopatra, 'Kleopatra-regular', fantasy);
-  font-size: 2rem;
+.logoButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logoButton:hover {
+  opacity: 0.8;
+}
+
+.logoIconBox {
+  background-color: var(--egyptian-gold, #ffb000);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIconText {
+  color: var(--egyptian-green, #1a5245);
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px; /* Slight offset often needed for visual centering of unicode glyphs */
+}
+
+.logoText {
+  font-family: var(--font-aniron, 'Kleopatra-regular', fantasy);
+  color: var(--egyptian-green, #1a5245);
   margin: 0;
-  color: #ffb000;
-  font-weight: bold;
 }
 
 .navLinks {
@@ -32,18 +68,19 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .link {
   color: #1a5245;
   text-decoration: none;
-  font-family: var(--font-aniron, serif);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
   transition: color 0.3s ease;
 }
 
-.link:hover {
+.link:hover,
+.active {
   color: #ffb000;
 }
 
@@ -53,7 +90,7 @@
     font-size: 1rem;
   }
 
-  .logo {
-    font-size: 1.5rem;
+  .logoText {
+    display: none;
   }
 }
