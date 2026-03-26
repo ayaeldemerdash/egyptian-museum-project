@@ -1,0 +1,364 @@
+:root {
+  --egyptian-green: #1a5245;
+  --egyptian-cream: #f5f0e4;
+  --egyptian-gold: #ffb000;
+  --egyptian-peach: #ffcba4;
+}
+
+.mainBackground {
+  min-height: 100vh;
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(
+    to bottom,
+    var(--egyptian-green),
+    var(--egyptian-cream)
+  );
+  position: relative;
+  overflow: hidden;
+  padding: 32px 20px;
+}
+
+.mainContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.featuredBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background-color: rgba(255, 176, 0, 0.18);
+  color: var(--egyptian-cream);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.artifactTitle {
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 1;
+  margin: 0;
+  color: var(--egyptian-cream);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.artifactSubtitle {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  margin: 0;
+  color: var(--egyptian-peach);
+  font-weight: 500;
+}
+
+.artifactDescription {
+  margin: 0;
+  color: rgba(245, 240, 228, 0.92);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(245, 240, 228, 0.08);
+  border: 1px solid rgba(245, 240, 228, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(245, 240, 228, 0.06);
+}
+
+.infoLabel {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 228, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.infoValue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--egyptian-cream);
+}
+
+.actionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-family: inherit;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: var(--egyptian-gold);
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btnSecondary {
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--egyptian-cream);
+  border: 1px solid rgba(245, 240, 228, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btnSecondary:hover {
+  background: rgba(245, 240, 228, 0.08);
+}
+
+.arrow {
+  font-size: 1rem;
+}
+
+.infoLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.infoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--egyptian-cream);
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.infoLink:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnTicket {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 14px 22px;
+  border-radius: 16px;
+  background: rgba(255, 203, 164, 0.14);
+  color: var(--egyptian-cream);
+  border: 1px solid rgba(255, 203, 164, 0.25);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.btnTicket:hover {
+  background: rgba(255, 203, 164, 0.2);
+}
+
+.ticketIcon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+.rightSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statueImage {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(245, 240, 228, 0.08);
+  border: 1px solid rgba(245, 240, 228, 0.15);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+
+.statueImage img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(245, 240, 228, 0.08);
+  border: 1px solid rgba(245, 240, 228, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.locationInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.locationIcon {
+  font-size: 1.2rem;
+}
+
+.locationText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.locationLabel {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 228, 0.75);
+}
+
+.locationName {
+  font-size: 0.95rem;
+  color: var(--egyptian-cream);
+  font-weight: 600;
+}
+
+.btnExplore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: var(--egyptian-gold);
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.btnExplore:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+@media (max-width: 1024px) {
+  .contentWrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .rightSection {
+    order: -1;
+  }
+
+  .statueImage {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainBackground {
+    padding: 24px 16px;
+  }
+
+  .infoRow {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btnExplore {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnSecondary,
+  .btnTicket {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .artifactTitle {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .artifactSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .artifactDescription {
+    font-size: 0.95rem;
+  }
+
+  .featuredBadge {
+    font-size: 0.85rem;
+  }
+}
