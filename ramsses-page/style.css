@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+   /* Egyptian Color Palette */
+  --egyptian-green: #1a5245;
+  --egyptian-cream: #f5f0e4;
+  --egyptian-gold: #ffb000;
+  --egyptian-peach: #ffcba4;
+}
+
+body {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main-background {
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    var(--egyptian-green),
+    var(--egyptian-cream)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.main-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    var(--egyptian-gold) 35px,
+    var(--egyptian-gold) 70px
+  );
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.main-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 200px);
+  gap: 0;
+}
+
+.left-section {
+  padding: 4rem 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.featured-badge {
+  background-color: color-mix(in srgb, var(--egyptian-gold) 20%, transparent);
+  color: var(--egyptian-gold) ;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-family: "Aniron", "Trajan Pro", serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: fit-content;
+  letter-spacing: 0.5px;
+}
+
+.artifact-title {
+  font-family:"Kleopatra", "Papyrus", fantasy;
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: var(--egyptian-cream);
+  line-height: 1;
+  letter-spacing: 2.5px;
+  margin-top: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.artifact-subtitle {
+  font-family: "Aniron", "Trajan Pro", serif;
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: var(--egyptian-peach);
+  line-height: 1.2;
+  letter-spacing: 2px;
+  margin-top: -0.5rem;
+}
+
+.artifact-description {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--egyptian-cream);
+  opacity: 0.95;
+  max-width: 600px;
+  margin-top: 0.5rem;
+}
+
+.info-box {
+  background-color: color-mix(in srgb, var(--egyptian-cream) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--egyptian-cream) 20%, transparent);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  font-size:0.875rem;
+  color: var(--egyptian-peach);
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.info-value {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  font-size: 0.875rem;
+  color: var(--egyptian-cream);
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.9rem 1.8rem;
+  border-radius: 6px;
+  font-family: "Aniron", "Trajan Pro", serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary {
+  background-color: var(--egyptian-gold);
+  color: var(--egyptian-green);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--egyptian-cream);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  color: var(--egyptian-green);
+}
+
+.arrow {
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.info-links {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.info-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color:var(--egyptian-cream);
+  text-decoration: none;
+  font-family: "Aniron", "Trajan Pro", serif;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.info-link:hover {
+  color: var(--egyptian-green);
+}
+/*-----------------------------------------------------------------------*/
+.info-link .icon {
+  font-size: 0.875rem;
+}
+
+.btn-ticket {
+   
+  background-color: var(--egyptian-green);
+  color: var(--egyptian-cream);
+  padding: 12px 24px;
+  width: fit-content;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+}
+
+.btn-ticket:hover 
+{
+  background-color: color-mix(in srgb, var(--egyptian-green) 90%, transparent);
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px rgba(0,0,0,0.3);
+}
+
+
+.ticket-icon {
+  font-size: 0.75rem;
+  transform: translateZ(0);
+}
+
+.ticket-icon img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.right-section {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.statue-image {
+  margin-top: 6rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statue-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUpImage 5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideUpImage {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.bottom-section {
+   background-color: color-mix(in srgb, var(--egyptian-green) 80%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--egyptian-gold) 30%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.location-icon {
+  font-size: 0.875rem;
+  color: var(--egyptian-gold);
+}
+
+.location-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.location-label {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  font-size: 0.875rem;
+  color: var(--egyptian-cream);
+  letter-spacing: 0.5px;
+}
+
+.location-name {
+  font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+  font-size: 1rem;
+  color: var(--egyptian-cream);
+  font-weight: 500;
+}
+
+.btn-explore {
+  background-color: var(--egyptian-gold);
+  color: var(--egyptian-green);
+  transition: background-color 0.3s ease;
+}
+
+.btn-explore:hover {
+  background-color: rgb(from var(--egyptian-gold) r g b / 90%);
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
