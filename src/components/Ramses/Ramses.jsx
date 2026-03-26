@@ -25,61 +25,61 @@ const Ramses = () => {
               </h2>
 
               <p className={styles["artifact-description"]}>
-                Discover the grandeur of one of ancient Egypt’s most iconic rulers.
-                Explore the legacy, architecture, and timeless history behind the
-                legendary Ramesses II.
+            Standing at 11 meters tall, this magnificent red granite colossus welcomes
+            visitors to the Egyptian Grand Museum. Ramesses II, one of Egypt's most
+            powerful rulers, reigned for 66 years during the 19th Dynasty.
               </p>
 
               <div className={styles["info-box"]}>
                 <div className={styles["info-row"]}>
                   <div className={styles["info-item"]}>
-                    <span className={styles["info-label"]}>Period</span>
-                    <span className={styles["info-value"]}>New Kingdom</span>
+                    <span className={styles["info-label"]}>Dynasty</span>
+                    <span className={styles["info-value"]}>19th Dynasty</span>
                   </div>
 
                   <div className={styles["info-item"]}>
-                    <span className={styles["info-label"]}>Dynasty</span>
-                    <span className={styles["info-value"]}>19th Dynasty</span>
+                    <span className={styles["info-label"]}>Period</span>
+                    <span className={styles["info-value"]}>1279-1213 BC</span>
                   </div>
                 </div>
 
                 <div className={styles["info-row"]}>
                   <div className={styles["info-item"]}>
-                    <span className={styles["info-label"]}>Reign</span>
-                    <span className={styles["info-value"]}>1279–1213 BC</span>
+                    <span className={styles["info-label"]}>Material</span>
+                    <span className={styles["info-value"]}>Red Granite</span>
                   </div>
 
                   <div className={styles["info-item"]}>
-                    <span className={styles["info-label"]}>Known For</span>
-                    <span className={styles["info-value"]}>Monuments & Temples</span>
+                    <span className={styles["info-label"]}>Height</span>
+                    <span className={styles["info-value"]}>11 meters</span>
                   </div>
                 </div>
               </div>
 
               <div className={styles["action-buttons"]}>
                 <button className={`${styles.btn} ${styles["btn-primary"]}`}>
-                  Learn More
+                  Interactive Experience
                   <span className={styles.arrow}>→</span>
                 </button>
 
                 <button className={`${styles.btn} ${styles["btn-secondary"]}`}>
-                  Watch Story
+                  Explore More Statues
                 </button>
               </div>
 
               <div className={styles["info-links"]}>
                 <a href="#" className={styles["info-link"]}>
-                  <span className={styles.icon}>★</span>
-                  Historical Facts
+                  <span className={styles.icon}>ⓘ</span>
+                  About the Museum
                 </a>
 
                 <a href="#" className={styles["info-link"]}>
-                  <span className={styles.icon}>⏳</span>
-                  Timeline
+                  <span className={styles.icon}>🗺</span>
+                  Visit Information
                 </a>
               </div>
 
-              <button className={styles["btn-ticket"]}>
+             <button className={styles["btn-ticket"]}>
                 <span className={styles["ticket-icon"]}>
                   <img src="/images/ticket.png" alt="ticket" />
                 </span>
@@ -103,13 +103,13 @@ const Ramses = () => {
               <div className={styles["location-text"]}>
                 <span className={styles["location-label"]}>Location</span>
                 <span className={styles["location-name"]}>
-                  Grand Egyptian Museum
+                  Main Entrance Hall, Egyptian Grand Museum
                 </span>
               </div>
             </div>
 
             <button className={`${styles.btn} ${styles["btn-explore"]}`}>
-              Explore Museum
+              Explore Interactive View
             </button>
           </div>
         </div>
