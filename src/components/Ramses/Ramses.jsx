@@ -8,122 +8,112 @@ const Ramses = () => {
     <>
       <NavBar />
 
-      <main style={{ paddingTop: '120px', minHeight: '100vh' }}>
-        <div className={styles.mainBackground}>
-          <section className={styles.mainContent}>
-            <div className={styles.contentWrapper}>
-              {/* Left Section */}
-              <section className={styles.leftSection}>
-                <div className={styles.featuredBadge}>Featured Artifact</div>
+      <div className={styles["main-background"]}>
+        <div className={styles["main-content"]}>
+          <div className={styles["content-wrapper"]}>
 
-                <h2 className={styles.artifactTitle}>RAMESSES II</h2>
-                <h3 className={styles.artifactSubtitle}>The Great Pharaoh</h3>
+            {/* Left Section */}
+            <div className={styles["left-section"]}>
+              <div className={styles["featured-badge"]}>
+                Featured Artifact
+              </div>
 
-                <p className={styles.artifactDescription}>
-                  Standing at 11 meters tall, this magnificent red granite colossus
-                  welcomes visitors to the Egyptian Grand Museum. Ramesses II, one
-                  of Egypt&apos;s most powerful rulers, reigned for 66 years during
-                  the 19th Dynasty.
-                </p>
+              <h1 className={styles["artifact-title"]}>RAMSES II</h1>
 
-                <div className={styles.infoBox}>
-                  <div className={styles.infoRow}>
-                    <div className={styles.infoItem}>
-                      <span className={styles.infoLabel}>Dynasty</span>
-                      <span className={styles.infoValue}>19th Dynasty</span>
-                    </div>
+              <h2 className={styles["artifact-subtitle"]}>
+                The Great Pharaoh
+              </h2>
 
-                    <div className={styles.infoItem}>
-                      <span className={styles.infoLabel}>Period</span>
-                      <span className={styles.infoValue}>1279-1213 BC</span>
-                    </div>
+              <p className={styles["artifact-description"]}>
+                Discover the grandeur of one of ancient Egypt’s most iconic rulers.
+                Explore the legacy, architecture, and timeless history behind the
+                legendary Ramesses II.
+              </p>
+
+              <div className={styles["info-box"]}>
+                <div className={styles["info-row"]}>
+                  <div className={styles["info-item"]}>
+                    <span className={styles["info-label"]}>Period</span>
+                    <span className={styles["info-value"]}>New Kingdom</span>
                   </div>
 
-                  <div className={styles.infoRow}>
-                    <div className={styles.infoItem}>
-                      <span className={styles.infoLabel}>Material</span>
-                      <span className={styles.infoValue}>Red Granite</span>
-                    </div>
-
-                    <div className={styles.infoItem}>
-                      <span className={styles.infoLabel}>Height</span>
-                      <span className={styles.infoValue}>11 meters</span>
-                    </div>
+                  <div className={styles["info-item"]}>
+                    <span className={styles["info-label"]}>Dynasty</span>
+                    <span className={styles["info-value"]}>19th Dynasty</span>
                   </div>
                 </div>
 
-                <div className={styles.actionButtons}>
-                  <button
-                    type="button"
-                    className={`${styles.btn} ${styles.btnPrimary}`}
-                  >
-                    Interactive Experience
-                    <span className={styles.arrow}>→</span>
-                  </button>
+                <div className={styles["info-row"]}>
+                  <div className={styles["info-item"]}>
+                    <span className={styles["info-label"]}>Reign</span>
+                    <span className={styles["info-value"]}>1279–1213 BC</span>
+                  </div>
 
-                  <button
-                    type="button"
-                    className={`${styles.btn} ${styles.btnSecondary}`}
-                  >
-                    Explore More Statues
-                  </button>
-                </div>
-
-                <div className={styles.infoLinks}>
-                  <a href="#about" className={styles.infoLink}>
-                    <span className={styles.icon}>ⓘ</span>
-                    About the Museum
-                  </a>
-
-                  <a href="#visit" className={styles.infoLink}>
-                    <span className={styles.icon}>🗺</span>
-                    Visit Information
-                  </a>
-                </div>
-
-                <button
-                  type="button"
-                  className={`${styles.btn} ${styles.btnTicket}`}
-                >
-                  <span className={styles.ticketIcon}>
-                    <img src="/images/ticket.png" alt="ticket" />
-                  </span>
-                  Book a Ticket
-                </button>
-              </section>
-
-              {/* Right Section */}
-              <section className={styles.rightSection}>
-                <div className={styles.statueImage}>
-                  <img src="/images/ramses.png" alt="Ramesses II Statue" />
-                </div>
-              </section>
-            </div>
-
-            {/* Bottom Section */}
-            <div className={styles.bottomSection}>
-              <div className={styles.locationInfo}>
-                <span className={styles.locationIcon}>📍</span>
-
-                <div className={styles.locationText}>
-                  <span className={styles.locationLabel}>Location</span>
-                  <span className={styles.locationName}>
-                    Main Entrance Hall, Egyptian Grand Museum
-                  </span>
+                  <div className={styles["info-item"]}>
+                    <span className={styles["info-label"]}>Known For</span>
+                    <span className={styles["info-value"]}>Monuments & Temples</span>
+                  </div>
                 </div>
               </div>
 
-              <button
-                type="button"
-                className={`${styles.btn} ${styles.btnExplore}`}
-              >
-                Explore Interactive View
-                <span className={styles.arrow}>→</span>
+              <div className={styles["action-buttons"]}>
+                <button className={`${styles.btn} ${styles["btn-primary"]}`}>
+                  Learn More
+                  <span className={styles.arrow}>→</span>
+                </button>
+
+                <button className={`${styles.btn} ${styles["btn-secondary"]}`}>
+                  Watch Story
+                </button>
+              </div>
+
+              <div className={styles["info-links"]}>
+                <a href="#" className={styles["info-link"]}>
+                  <span className={styles.icon}>★</span>
+                  Historical Facts
+                </a>
+
+                <a href="#" className={styles["info-link"]}>
+                  <span className={styles.icon}>⏳</span>
+                  Timeline
+                </a>
+              </div>
+
+              <button className={styles["btn-ticket"]}>
+                <span className={styles["ticket-icon"]}>
+                  <img src="/images/ticket.png" alt="ticket" />
+                </span>
+                Book Ticket
               </button>
             </div>
-          </section>
+
+            {/* Right Section */}
+            <div className={styles["right-section"]}>
+              <div className={styles["statue-image"]}>
+                <img src="/public/images/photo-1728739831383-d8a2cdc283cb.jpg" alt="Ramesses II Statue" />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className={styles["bottom-section"]}>
+            <div className={styles["location-info"]}>
+              <span className={styles["location-icon"]}>📍</span>
+
+              <div className={styles["location-text"]}>
+                <span className={styles["location-label"]}>Location</span>
+                <span className={styles["location-name"]}>
+                  Grand Egyptian Museum
+                </span>
+              </div>
+            </div>
+
+            <button className={`${styles.btn} ${styles["btn-explore"]}`}>
+              Explore Museum
+            </button>
+          </div>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </>
