@@ -3,10 +3,6 @@ import NavBar from '../shared/NavBar';
 import Footer from '../shared/Footer';
 import styles from './Ramses.module.css';
 
-// عدلي مسار الصور حسب مكانهم عندك
-import ramsesImage from '../assets/ramses.png';
-import ticketIcon from '../assets/ticket.png';
-
 const Ramses = () => {
   return (
     <>
@@ -90,7 +86,7 @@ const Ramses = () => {
                   className={`${styles.btn} ${styles.btnTicket}`}
                 >
                   <span className={styles.ticketIcon}>
-                    <img src={ticketIcon} alt="ticket" />
+                    <img src="/images/ticket.png" alt="ticket" />
                   </span>
                   Book a Ticket
                 </button>
@@ -99,7 +95,7 @@ const Ramses = () => {
               {/* Right Section */}
               <section className={styles.rightSection}>
                 <div className={styles.statueImage}>
-                  <img src={ramsesImage} alt="Ramesses II Statue" />
+                  <img src="/images/ramses.png" alt="Ramesses II Statue" />
                 </div>
               </section>
             </div>
