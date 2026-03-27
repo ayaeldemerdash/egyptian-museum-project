@@ -204,7 +204,6 @@
 }
 
 .btn-ticket {
-   
   background-color: var(--egyptian-green);
   color: var(--egyptian-cream);
   padding: 12px 24px;
@@ -215,6 +214,10 @@
   transition: all 0.3s ease;
   box-shadow: 0 10px 15px rgba(0,0,0,0.2);
   font-family: "Goudy Bookletter 1911", "Goudy Old Style", serif;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-ticket:hover 
@@ -226,15 +229,12 @@
 
 
 .ticket-icon {
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform: translateZ(0);
 }
 
-.ticket-icon img {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
 
 .right-section {
   position: relative;
@@ -295,7 +295,9 @@
 }
 
 .location-icon {
-  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--egyptian-gold);
 }
 

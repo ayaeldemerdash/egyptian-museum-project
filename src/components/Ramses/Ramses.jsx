@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Ticket, Calendar } from 'lucide-react';
 import NavBar from '../shared/NavBar';
 import Footer from '../shared/Footer';
 import styles from './Ramses.module.css';
@@ -108,7 +109,7 @@ const Ramses = () => {
 
               <button className={styles["btn-ticket"]} onClick={handleBooking}>
                 <span className={styles["ticket-icon"]}>
-                  <img src="/images/ticket.png" alt="ticket" />
+                  <Ticket size={18} />
                 </span>
                 Book Ticket
               </button>
@@ -127,16 +128,17 @@ const Ramses = () => {
 
           {/* Bottom Section */}
           <div className={styles["bottom-section"]}>
-            <div className={styles["location-info"]}>
-              <span className={styles["location-icon"]}>📍</span>
-
-              <div className={styles["location-text"]}>
-                <span className={styles["location-label"]}>Location</span>
-                <span className={styles["location-name"]}>
-                  Main Entrance Hall, Egyptian Grand Museum
-                </span>
-              </div>
+           <div className={styles["location-info"]}>
+            <span className={styles["location-icon"]}>
+              <Calendar size={20} />
+            </span>
+            <div className={styles["location-text"]}>
+              <span className={styles["location-label"]}>Location</span>
+              <span className={styles["location-name"]}>
+                Main Entrance Hall, Egyptian Grand Museum
+              </span>
             </div>
+          </div>
 
             <button
               className={`${styles.btn} ${styles["btn-explore"]}`}
