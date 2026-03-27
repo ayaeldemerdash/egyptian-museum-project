@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../shared/NavBar';
 import Footer from '../shared/Footer';
 import styles from './Ramses.module.css';
 
 const Ramses = () => {
+  const navigate = useNavigate();
+
+  const handleBooking = () => {
+    window.open("https://visit-gem.com/en/AdmissionTkt", "_blank");
+  };
+
   return (
     <>
       <NavBar />
@@ -25,9 +32,9 @@ const Ramses = () => {
               </h2>
 
               <p className={styles["artifact-description"]}>
-            Standing at 11 meters tall, this magnificent red granite colossus welcomes
-            visitors to the Egyptian Grand Museum. Ramesses II, one of Egypt's most
-            powerful rulers, reigned for 66 years during the 19th Dynasty.
+                Standing at 11 meters tall, this magnificent red granite colossus welcomes
+                visitors to the Egyptian Grand Museum. Ramesses II, one of Egypt&apos;s most
+                powerful rulers, reigned for 66 years during the 19th Dynasty.
               </p>
 
               <div className={styles["info-box"]}>
@@ -57,29 +64,49 @@ const Ramses = () => {
               </div>
 
               <div className={styles["action-buttons"]}>
-                <button className={`${styles.btn} ${styles["btn-primary"]}`}>
+                <button
+                  className={`${styles.btn} ${styles["btn-primary"]}`}
+                  onClick={() => navigate("/status")}
+                >
                   Interactive Experience
                   <span className={styles.arrow}>→</span>
                 </button>
 
-                <button className={`${styles.btn} ${styles["btn-secondary"]}`}>
+                <button
+                  className={`${styles.btn} ${styles["btn-secondary"]}`}
+                  onClick={() => navigate("/status")}
+                >
                   Explore More Statues
                 </button>
               </div>
 
               <div className={styles["info-links"]}>
-                <a href="#" className={styles["info-link"]}>
+                <a
+                  href="#"
+                  className={styles["info-link"]}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/about");
+                  }}
+                >
                   <span className={styles.icon}>ⓘ</span>
                   About the Museum
                 </a>
 
-                <a href="#" className={styles["info-link"]}>
+                <a
+                  href="#"
+                  className={styles["info-link"]}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/");
+                  }}
+                >
                   <span className={styles.icon}>🗺</span>
                   Visit Information
                 </a>
               </div>
 
-             <button className={styles["btn-ticket"]}>
+              <button className={styles["btn-ticket"]} onClick={handleBooking}>
                 <span className={styles["ticket-icon"]}>
                   <img src="/images/ticket.png" alt="ticket" />
                 </span>
@@ -90,7 +117,10 @@ const Ramses = () => {
             {/* Right Section */}
             <div className={styles["right-section"]}>
               <div className={styles["statue-image"]}>
-                <img src="/public/images/photo-1728739831383-d8a2cdc283cb.jpg" alt="Ramesses II Statue" />
+                <img
+                  src="/images/photo-1728739831383-d8a2cdc283cb.jpg"
+                  alt="Ramesses II Statue"
+                />
               </div>
             </div>
           </div>
@@ -108,7 +138,10 @@ const Ramses = () => {
               </div>
             </div>
 
-            <button className={`${styles.btn} ${styles["btn-explore"]}`}>
+            <button
+              className={`${styles.btn} ${styles["btn-explore"]}`}
+              onClick={() => navigate("/status")}
+            >
               Explore Interactive View
             </button>
           </div>
