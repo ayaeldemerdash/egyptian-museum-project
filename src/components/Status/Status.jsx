@@ -9,7 +9,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 const KNOWLEDGE_BASE_URL = 'https://khalid.pythonanywhere.com/media/knowledge_base.txt';
-const STATUES_API_URL = 'https://khalid.pythonanywhere.com/api/';
+const STATUES_API_URL = 'https://yousrasakr.pythonanywhere.com/api/';
 
 const initialStatues = [
   { 
@@ -18,7 +18,7 @@ const initialStatues = [
     fullName: 'Sekhmet Statue',
     apiName: 'a_statue_of_sekhmet', 
     image: '/images/photo-1728739831383-d8a2cdc283cb.jpg',
-    model_3d: 'https://khalid.pythonanywhere.com/media/models_3d/a_statue_of_sekhmet.glb',
+    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/a_statue_of_sekhmet.glb',
     description: 'A powerful lioness-headed goddess, daughter of Ra. This statue depicts Sekhmet seated, representing both her destructive power in war and her legendary healing abilities. Such statues were often placed in temples to protect the pharaoh.',
     material: 'Diorite / Granite',
     height: '210 cm',
@@ -108,7 +108,7 @@ const initialStatues = [
     fullName: 'Khafre Seated',
     apiName: 'seated_statue_of_khafre', 
     image: 'public/images/imagee.webp',
-    model_3d: 'https://khalid.pythonanywhere.com/media/models_3d/seated_statue_of_khafre.glb',
+    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/seated_statue_of_khafre.glb',
     description: 'A masterpiece of Old Kingdom sculpture, depicting Khafre seated on his throne. The Horus falcon perches behind his head, spreading its wings in a gesture of divine protection over the king.',
     material: 'Anorthosite Gneiss',
     height: '168 cm',
@@ -123,7 +123,7 @@ const initialStatues = [
     fullName: 'Amun & Horemheb',
     apiName: 'statue_of_amun_and_horemheb', 
     image: '/images/photo-1695902263765-9636769b5833.jpg',
-    model_3d: 'https://khalid.pythonanywhere.com/media/models_3d/statue_of_amun_and_horemheb.glb',
+    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/statue_of_amun_and_horemheb.glb',
     description: 'This statue shows the pharaoh Horemheb seated beside the god Amun. It symbolizes the divine legitimacy of Horemheb\'s reign after the Amarna period, showing the king as the chosen of the gods.',
     material: 'Granite',
     height: '190 cm',
@@ -138,7 +138,7 @@ const initialStatues = [
     fullName: 'Hatshepsut',
     apiName: 'statue_of_hatshepsut', 
     image: '/images/photo-1728739831383-d8a2cdc283cb.jpg',
-    model_3d: 'https://khalid.pythonanywhere.com/media/models_3d/statue_of_hatshepsut_1akBmid.glb',
+    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/statue_of_hatshepsut_1akBmid.glb',
     description: 'Hatshepsut was one of the most successful pharaohs, ruling for over 20 years. This statue depicts her with the traditional regalia of a pharaoh, asserting her authority as a legitimate ruler of Egypt.',
     material: 'Indurated Limestone',
     height: '195 cm',
