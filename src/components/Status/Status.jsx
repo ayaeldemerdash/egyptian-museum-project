@@ -7,13 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// 2. إنشاء الـ Instance بطريقة صحيحة (مع مراعاة Vite)
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 // رابط قاعدة البيانات المعرفية (Knowledge Base)
 const KNOWLEDGE_BASE_URL = 'https://khalid.pythonanywhere.com/media/knowledge_base.txt';
 const STATUES_API_URL = 'https://khalid.pythonanywhere.com/api/';
 
-// مصفوفة التماثيل الأساسية
 const initialStatues = [
   { 
     id: '1', 
@@ -186,7 +184,6 @@ export default function Status() {
   const chatEndRef = useRef(null);
   const modelViewerRef = useRef(null);
 
-  // Memoize active statue to avoid redundant lookups
   const activeStatue = useMemo(() => statues.find(s => s.id === activeId) || statues[0], [activeId, statues]);
 
   // Memoize statue details with proxied URL
@@ -199,11 +196,9 @@ export default function Status() {
     return { ...activeStatue, model_3d: modelUrl };
   }, [activeStatue]);
 
-  // reset model error when switching statues
   useEffect(() => { setModelError(false); }, [activeId]);
 
   useEffect(() => {
-    // Dynamically import model-viewer to avoid SSR/initialization issues
     import('@google/model-viewer').then(() => {
       // Add event listener for camera-change as a fallback for the prop
       const viewer = modelViewerRef.current;
@@ -250,7 +245,6 @@ export default function Status() {
   useEffect(() => {
     const fetchStatues = async () => {
       try {
-        // Using local server proxy to ensure reliability and avoid CORS/403 issues
         const proxiedApiUrl = `/api/proxy?url=${encodeURIComponent(STATUES_API_URL)}`;
         const response = await fetch(proxiedApiUrl);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -267,14 +261,12 @@ export default function Status() {
               return {
                 ...local,
                 ...apiMatch,
-                // Ensure ID is string for consistency
                 id: local.id
               };
             }
             return local;
           });
 
-          // Also add any new statues from API that aren't in initialStatues
           data.forEach(api => {
             const exists = mergedStatues.some(m => 
               m.id?.toString() === api.id?.toString() || 
@@ -292,18 +284,11 @@ export default function Status() {
         }
       } catch (error) {
         console.error('Error fetching statues from API:', error);
-        // Fallback is already set to initialStatues in useState
       }
     };
     fetchStatues();
   }, []);
 
-  // تم إزالة التمرير التلقائي للأسفل بناءً على طلب المستخدم
-  /*
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-  */
 
   const handleSendQuestion = async (directMsg = null) => {
     // If we are listening, stop it
@@ -313,7 +298,6 @@ export default function Status() {
       setIsListening(false);
     }
 
-    // تأكد من تجاهل كائن الحدث (Event) إذا تم استدعاء الدالة من زر الإرسال
     const msgToSend = (typeof directMsg === 'string' ? directMsg : null) || question;
     if (!msgToSend.trim()) return;
 
@@ -358,7 +342,6 @@ export default function Status() {
       });
       
       let fullResponse = '';
-      // Add an empty bot message that we will update
       setMessages(prev => [...prev, { role: 'bot', text: '' }]);
       
       for await (const chunk of response) {
@@ -439,14 +422,14 @@ export default function Status() {
 
     const recognition = new SpeechRecognition();
     recognitionRef.current = recognition;
-    recognition.lang = 'ar-EG'; // Set language to Arabic (Egypt)
+    recognition.lang = 'ar-EG'; 
     recognition.interimResults = true;
     recognition.continuous = true;
 
     recognition.onstart = () => {
       setIsListening(true);
       wasStoppedManually.current = false;
-      transcriptRef.current = question; // Start with existing text
+      transcriptRef.current = question; 
     };
 
     recognition.onresult = (event) => {
@@ -472,7 +455,6 @@ export default function Status() {
 
     recognition.onend = () => {
       setIsListening(false);
-      // إرسال الرسالة تلقائياً عند انتهاء التسجيل إذا كان هناك نص
       setQuestion(prev => {
         if (prev.trim()) {
           handleSendQuestion(prev);
