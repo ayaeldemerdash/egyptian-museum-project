@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
-// رابط قاعدة البيانات المعرفية (Knowledge Base)
 const KNOWLEDGE_BASE_URL = 'https://khalid.pythonanywhere.com/media/knowledge_base.txt';
 const STATUES_API_URL = 'https://khalid.pythonanywhere.com/api/';
 
@@ -186,7 +185,6 @@ export default function Status() {
 
   const activeStatue = useMemo(() => statues.find(s => s.id === activeId) || statues[0], [activeId, statues]);
 
-  // Memoize statue details with proxied URL
   const statueDetails = useMemo(() => {
     if (!activeStatue) return null;
     let modelUrl = activeStatue.model_3d;
@@ -200,7 +198,6 @@ export default function Status() {
 
   useEffect(() => {
     import('@google/model-viewer').then(() => {
-      // Add event listener for camera-change as a fallback for the prop
       const viewer = modelViewerRef.current;
       if (viewer) {
         const handleCamera = (event) => {
@@ -251,7 +248,6 @@ export default function Status() {
         
         const data = await response.json();
         if (Array.isArray(data)) {
-          // Merge logic: Prefer API data but keep local data as fallback for missing fields
           const mergedStatues = initialStatues.map(local => {
             const apiMatch = data.find(api => 
               api.id?.toString() === local.id?.toString() || 
@@ -291,7 +287,6 @@ export default function Status() {
 
 
   const handleSendQuestion = async (directMsg = null) => {
-    // If we are listening, stop it
     if (isListening && !directMsg) {
       wasStoppedManually.current = false;
       recognitionRef.current?.stop();
