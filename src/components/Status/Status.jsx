@@ -12,23 +12,9 @@ const KNOWLEDGE_BASE_URL = 'https://khalid.pythonanywhere.com/media/knowledge_ba
 const STATUES_API_URL = 'https://yousrasakr.pythonanywhere.com/api/';
 
 const initialStatues = [
+  
   { 
     id: '1', 
-    name: 'Sekhmet', 
-    fullName: 'Sekhmet Statue',
-    apiName: 'a_statue_of_sekhmet', 
-    image: '/images/photo-1728739831383-d8a2cdc283cb.jpg',
-    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/a_statue_of_sekhmet.glb',
-    description: 'A powerful lioness-headed goddess, daughter of Ra. This statue depicts Sekhmet seated, representing both her destructive power in war and her legendary healing abilities. Such statues were often placed in temples to protect the pharaoh.',
-    material: 'Diorite / Granite',
-    height: '210 cm',
-    period: 'New Kingdom',
-    dynasty: '18th Dynasty',
-    tags: ['Goddess', 'Protection', 'Healing'],
-    quick_facts: ['Sekhmet was the goddess of war and healing', 'Represented as a lioness', 'Found in the Temple of Mut']
-  },
-  { 
-    id: '2', 
     name: 'Amenhotep II', 
     fullName: 'Amenhotep II',
     apiName: 'amenhotep_ii', 
@@ -43,7 +29,7 @@ const initialStatues = [
     quick_facts: ['Known as the "Athlete King"', 'Son of Thutmose III', 'His tomb is KV35']
   },
   { 
-    id: '3', 
+    id: '2', 
     name: 'Cleopatra', 
     fullName: 'Cleopatra Bust',
     apiName: 'cleopatra_bust', 
@@ -58,7 +44,7 @@ const initialStatues = [
     quick_facts: ['Last active ruler of the Ptolemaic Kingdom', 'Known for her intelligence and charisma', 'Fluent in multiple languages']
   },
   { 
-    id: '4', 
+    id: '3', 
     name: 'Ramesses II', 
     fullName: 'Ramesses II',
     apiName: 'colossal_bust_ramesses_ii_-_livestream_tutorial', 
@@ -73,7 +59,7 @@ const initialStatues = [
     quick_facts: ['Often regarded as the greatest Pharaoh', 'Ruled for 66 years', 'Built Abu Simbel']
   },
   { 
-    id: '5', 
+    id: '4', 
     name: 'Khufu', 
     fullName: 'Khufu Statuette',
     apiName: 'ivory_statuette_of_khufu', 
@@ -88,7 +74,7 @@ const initialStatues = [
     quick_facts: ['Only surviving three-dimensional image of Khufu', 'Found at Abydos', 'Builder of the Great Pyramid','the most famous surviving small statuette']
   },
   { 
-    id: '6', 
+    id: '5', 
     name: 'King Djoser', 
     fullName: 'King Djoser',
     apiName: 'ka_statue_of_king_djoser', 
@@ -103,52 +89,7 @@ const initialStatues = [
     quick_facts: ['Commissioned the Step Pyramid at Saqqara', 'First pyramid builder', 'His Ka statue was found in a serdab']
   },
   { 
-    id: '7', 
-    name: 'Khafre', 
-    fullName: 'Khafre Seated',
-    apiName: 'seated_statue_of_khafre', 
-    image: 'public/images/imagee.webp',
-    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/seated_statue_of_khafre.glb',
-    description: 'A masterpiece of Old Kingdom sculpture, depicting Khafre seated on his throne. The Horus falcon perches behind his head, spreading its wings in a gesture of divine protection over the king.',
-    material: 'Anorthosite Gneiss',
-    height: '168 cm',
-    period: 'Old Kingdom',
-    dynasty: '4th Dynasty',
-    tags: ['Pharaoh', 'Horus', 'Protection'],
-    quick_facts: ['Builder of the second largest pyramid at Giza', 'Protected by the Horus falcon', 'Found in the Valley Temple']
-  },
-  { 
-    id: '8', 
-    name: 'Amun & Horemheb', 
-    fullName: 'Amun & Horemheb',
-    apiName: 'statue_of_amun_and_horemheb', 
-    image: '/images/photo-1695902263765-9636769b5833.jpg',
-    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/statue_of_amun_and_horemheb.glb',
-    description: 'This statue shows the pharaoh Horemheb seated beside the god Amun. It symbolizes the divine legitimacy of Horemheb\'s reign after the Amarna period, showing the king as the chosen of the gods.',
-    material: 'Granite',
-    height: '190 cm',
-    period: 'New Kingdom',
-    dynasty: '18th Dynasty',
-    tags: ['Pharaoh', 'God', 'Legitimacy'],
-    quick_facts: ['Horemheb was the last pharaoh of the 18th dynasty', 'Depicts the king with the god Amun', 'Symbolizes divine approval of kingship']
-  },
-  { 
-    id: '9', 
-    name: 'Hatshepsut', 
-    fullName: 'Hatshepsut',
-    apiName: 'statue_of_hatshepsut', 
-    image: '/images/photo-1728739831383-d8a2cdc283cb.jpg',
-    model_3d: 'https://yousrasakr.pythonanywhere.com/media/models_3d/statue_of_hatshepsut_1akBmid.glb',
-    description: 'Hatshepsut was one of the most successful pharaohs, ruling for over 20 years. This statue depicts her with the traditional regalia of a pharaoh, asserting her authority as a legitimate ruler of Egypt.',
-    material: 'Indurated Limestone',
-    height: '195 cm',
-    period: 'New Kingdom',
-    dynasty: '18th Dynasty',
-    tags: ['Queen', 'Pharaoh', 'Trade'],
-    quick_facts: ['One of the few female pharaohs', 'Established major trade routes', 'Built Deir el-Bahari']
-  },
-  { 
-    id: '10', 
+    id: '6', 
     name: 'Thutmose III', 
     fullName: 'Thutmose III',
     apiName: 'thutmose_iii_statue_from_karnak_temple_egypt', 
