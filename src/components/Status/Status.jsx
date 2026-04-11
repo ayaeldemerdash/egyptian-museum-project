@@ -328,14 +328,14 @@ export default function Status() {
   const handleZoomIn = () => {
     setZoom(prev => Math.min(prev + 10, 200));
     if (modelViewerRef.current) {
-      modelViewerRef.current.zoom(1.1);
+      modelViewerRef.current.zoom(1); // تكبير الحجم (الاقتراب)
     }
   };
 
   const handleZoomOut = () => {
     setZoom(prev => Math.max(prev - 10, 50));
     if (modelViewerRef.current) {
-      modelViewerRef.current.zoom(0.9);
+      modelViewerRef.current.zoom(-1); // تصغير الحجم فعلياً (الابتعاد)
     }
   };
 
@@ -411,7 +411,10 @@ export default function Status() {
         {/* Collection Header Section (Ticket Booking) */}
         <header className={styles.collectionHeader}>
           <h1 className={styles.collectionTitle}>STATUES COLLECTION</h1>
-          <button className={styles.bookTicketBtn}>
+          <button 
+            className={styles.bookTicketBtn} 
+            onClick={() => window.open('https://visit-gem.com/en/AdmissionTkt', '_blank')}
+          >
             <Ticket className={styles.ticketIcon} />
             <span>Book a Ticket</span>
           </button>
@@ -482,7 +485,6 @@ export default function Status() {
                   ref={modelViewerRef}
                   src={statueDetails.model_3d}
                   alt={statueDetails.name}
-                  auto-rotate
                   camera-controls
                   shadow-intensity="1"
                   environment-image="neutral"
@@ -491,7 +493,9 @@ export default function Status() {
                   reveal="auto"
                   ar
                   ar-modes="webxr scene-viewer quick-look"
-                  interaction-prompt="auto"
+                  interaction-prompt="none"
+                  orbit-sensitivity="2"
+                  damping-factor="0.05"
                   style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
                   camera-orbit={`${rotation}deg 75deg auto`}
                   onError={() => setModelError(true)}
@@ -533,7 +537,7 @@ export default function Status() {
                   <ZoomOut className="w-4 h-4" />
                 </button>
               </div>
-              <p className={styles.viewerCaption}>Use controls to rotate and zoom the model</p>
+              <p className={styles.viewerCaption}>Use mouse to rotate and controls to zoom</p>
             </div>
           </div>
 
