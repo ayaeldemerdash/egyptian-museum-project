@@ -795,3 +795,37 @@
 :global(.custom-scrollbar)::-webkit-scrollbar-thumb:hover {
   background: var(--egyptian-gold);
 }
+
+.viewerDisplay {
+  position: relative;
+}
+
+.mouthOverlay {
+  position: absolute;
+  bottom: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.2),
+    transparent
+  );
+
+  mix-blend-mode: multiply;
+  filter: blur(1px);
+  z-index: 10;
+}
+/* 🔥 animation */
+@keyframes talk {
+  from {
+    transform: translateX(-50%) scaleY(1);
+  }
+  to {
+    transform: translateX(-50%) scaleY(2.5);
+  }
+}
+

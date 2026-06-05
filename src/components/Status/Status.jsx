@@ -11,15 +11,15 @@ const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 const KNOWLEDGE_BASE_URL = 'https://khalid.pythonanywhere.com/media/knowledge_base.txt';
 const STATUES_API_URL = 'https://yousrasakr.pythonanywhere.com/api/';
 
+// الخطوة 1: تحديث التماثيل الـ 6 بالـ apiName و المسارات الصحيحة لتطابق السيرفر
 const initialStatues = [
-  
   { 
     id: '1', 
     name: 'Amenhotep II', 
     fullName: 'Amenhotep II',
     apiName: 'amenhotep_ii', 
     image: '/images/photo-1566214358736-df5a0048a9db.jpg',
-    model_3d: 'public/images/amenhotep_ii.glb',
+    model_3d: '/images/amenhotep_ii.glb',
     description: 'Amenhotep II was a pharaoh of the 18th Dynasty, celebrated for his immense physical strength and military achievements. This statue captures the royal dignity and athletic build for which he was famous.',
     material: 'Quartzite',
     height: '150 cm',
@@ -34,7 +34,7 @@ const initialStatues = [
     fullName: 'Cleopatra Bust',
     apiName: 'cleopatra_bust', 
     image: '/images/photo-1695902263765-9636769b5833.jpg',
-    model_3d: 'public/images/cleopatra_bust.glb',
+    model_3d: '/images/cleopatra_bust.glb',
     description: 'The last active ruler of the Ptolemaic Kingdom of Egypt. This bust represents Cleopatra VII, a woman of great intelligence and political acumen who spoke multiple languages and navigated the complex world of Roman-Egyptian relations.',
     material: 'Marble',
     height: '55 cm',
@@ -49,7 +49,7 @@ const initialStatues = [
     fullName: 'Ramesses II',
     apiName: 'colossal_bust_ramesses_ii_-_livestream_tutorial', 
     image: '/images/photo-1738935457671-76b950b9262e.jpg',
-    model_3d: 'public/images/colossal_bust_ramesses_ii_-_livestream_tutorial.glb',
+    model_3d: '/images/colossal_bust_ramesses_ii_-_livestream_tutorial.glb',
     description: 'Ramesses the Great, one of the most powerful pharaohs in history. This colossal bust showcases the idealized features of the king who ruled for 66 years and built more monuments than any other pharaoh.',
     material: 'Granite',
     height: '267 cm',
@@ -64,7 +64,7 @@ const initialStatues = [
     fullName: 'Khufu Statuette',
     apiName: 'ivory_statuette_of_khufu', 
     image: '/images/photo-1728739831383-d8a2cdc283cb.jpg',
-    model_3d: 'public/images/ivory_statuette_of_khufu.glb',
+    model_3d: '/images/ivory_statuette_of_khufu.glb',
     description: 'A tiny ivory statuette found at Abydos, representing Khufu wearing the Red Crown of Lower Egypt. While it is the most famous and widely accepted three-dimensional image of the Great Pyramid\'s builder, its small size (only 7.5 cm) contrasts sharply with the scale of his architectural achievements.',
     material: 'Ivory',
     height: '7.5 cm',
@@ -79,7 +79,7 @@ const initialStatues = [
     fullName: 'King Djoser',
     apiName: 'ka_statue_of_king_djoser', 
     image: '/images/photo-1637356216542-0d0a4e93f992.jpg',
-    model_3d: 'public/images/ka_statue_of_king_djoser.glb',
+    model_3d: '/images/ka_statue_of_king_djoser.glb',
     description: 'The Ka statue of Djoser was designed to house the pharaoh\'s spirit. Djoser is famous for commissioning the Step Pyramid at Saqqara, the first large-scale stone structure in history.',
     material: 'Limestone',
     height: '142 cm',
@@ -94,7 +94,7 @@ const initialStatues = [
     fullName: 'Thutmose III',
     apiName: 'thutmose_iii_statue_from_karnak_temple_egypt', 
     image: '/images/photo-1566214358736-df5a0048a9db.jpg',
-    model_3d: 'public/images/thutmose_iii_statue_from_karnak_temple_egypt.glb',
+    model_3d: '/images/thutmose_iii_statue_from_karnak_temple_egypt.glb',
     description: 'Thutmose III, the great conqueror who expanded Egypt\'s borders to their maximum extent. This statue from Karnak shows the pharaoh in a classic pose of royal authority and strength.',
     material: 'Basalt',
     height: '200 cm',
@@ -105,25 +105,29 @@ const initialStatues = [
   },
 ];
 
-
 export default function Status() {
   const [statues, setStatues] = useState(initialStatues);
   const [activeId, setActiveId] = useState('2');
   const [question, setQuestion] = useState('');
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [aiKnowledge, setAiKnowledge] = useState("");
+ 
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(100);
   const [modelError, setModelError] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  
   const recognitionRef = useRef(null);
   const wasStoppedManually = useRef(false);
   const transcriptRef = useRef('');
   const sliderRef = useRef(null);
   const chatEndRef = useRef(null);
   const modelViewerRef = useRef(null);
-
+  const audioRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const [isTalking, setIsTalking] = useState(false);
+  const sourceRef = useRef(null);
   const activeStatue = useMemo(() => statues.find(s => s.id === activeId) || statues[0], [activeId, statues]);
 
   const statueDetails = useMemo(() => {
@@ -135,13 +139,21 @@ export default function Status() {
     return { ...activeStatue, model_3d: modelUrl };
   }, [activeStatue]);
 
-  useEffect(() => { setModelError(false); }, [activeId]);
+  // الخطوة 9: تصفير حالة التحدث والأخطاء فوراً عند انتقال المستخدم لتمثال آخر
+  useEffect(() => { 
+    setModelError(false); 
+    setIsTalking(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [activeId]);
 
   useEffect(() => {
     import('@google/model-viewer').then(() => {
       const viewer = modelViewerRef.current;
       if (viewer) {
-        const handleCamera = (event) => {
+        const handleCamera = () => {
           const orbit = viewer.getCameraOrbit();
           const theta = (orbit.theta * 180) / Math.PI;
           setRotation(Math.round(theta % 360));
@@ -161,24 +173,8 @@ export default function Status() {
         text: `أهلاً بك في رحاب الحضارة المصرية القديمة! 🏛️ أنا مرشدك السياحي الذكي، يسعدني جداً مساعدتك في اكتشاف أسرار ${activeStatue.fullName || activeStatue.name}. ما الذي تود معرفته اليوم؟`
       }]);
     }
-  }, [activeId]);
+ }, [activeId, activeStatue]);
 
-  useEffect(() => {
-    const fetchKnowledge = async () => {
-      if (!KNOWLEDGE_BASE_URL) return;
-      try {
-        const proxiedUrl = `/api/proxy?url=${encodeURIComponent(KNOWLEDGE_BASE_URL)}`;
-        const response = await fetch(proxiedUrl);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const data = await response.text();
-        setAiKnowledge(data);
-      } catch (error) {
-        console.error('Error fetching AI knowledge:', error);
-      }
-    };
-    fetchKnowledge();
-  }, []);
 
   useEffect(() => {
     const fetchStatues = async () => {
@@ -194,14 +190,7 @@ export default function Status() {
               api.id?.toString() === local.id?.toString() || 
               api.name?.toLowerCase() === local.name?.toLowerCase()
             );
-            if (apiMatch) {
-              return {
-                ...local,
-                ...apiMatch,
-                id: local.id
-              };
-            }
-            return local;
+            return apiMatch ? { ...local, ...apiMatch, id: local.id } : local;
           });
 
           data.forEach(api => {
@@ -216,7 +205,6 @@ export default function Status() {
               });
             }
           });
-
           setStatues(mergedStatues);
         }
       } catch (error) {
@@ -226,74 +214,133 @@ export default function Status() {
     fetchStatues();
   }, []);
 
+  useEffect(() => {
+    const unlockAudio = () => {
+      const audio = new Audio();
+      audio.play().catch(() => {});
+    };
+    document.addEventListener("click", unlockAudio, { once: true });
+    return () => document.removeEventListener("click", unlockAudio);
+  }, []);
 
-  const handleSendQuestion = async (directMsg = null) => {
-    if (isListening && !directMsg) {
-      wasStoppedManually.current = false;
-      recognitionRef.current?.stop();
-      setIsListening(false);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isTyping]);
+
+
+  // 🔥 تحديث الدالة لتتوافق تماماً مع الخطوات (2، 3، 4، 5، 6، 7) لـ 6 تماثيل ديناميكية
+  const handleSendQuestion = async (textOverride = null) => {
+    const userMsg = textOverride || question;
+    if (!userMsg.trim()) return;
+
+    // الخطوة 3: عمل Reset وتحضير الأنيميشن والصوت قبل استقبال الرد الجديد
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
+    setIsTalking(false);
 
-    const msgToSend = (typeof directMsg === 'string' ? directMsg : null) || question;
-    if (!msgToSend.trim()) return;
-
-    const userMsg = msgToSend;
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setQuestion('');
     setIsTyping(true);
 
     try {
-      const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey) {
-        setMessages(prev => [...prev, { role: 'bot', text: "عذراً، مفتاح API الخاص بـ Gemini غير متوفر. يرجى إعداده في الإعدادات." }]);
-        return;
-      }
-      
-      const response = await ai.models.generateContentStream({
-        model: "gemini-3-flash-preview",
-        contents: userMsg,
-        config: {
-          systemInstruction: `You are a professional and engaging Museum Guide at the Grand Egyptian Museum. 
-          Your tone is historical, respectful, and captivating. 
-          
-          Statue Context:
-          - Name: ${statueDetails?.fullName || statueDetails?.name || 'this Ancient Egyptian statue'}
-          - Material: ${statueDetails?.material || 'unknown'}
-          - Period: ${statueDetails?.period || 'Ancient Egypt'}
-          - Dynasty: ${statueDetails?.dynasty || 'unknown'}
-          - Description: ${statueDetails?.description || ''}
-          
-          CRITICAL KNOWLEDGE BASE:
-          ${aiKnowledge || 'No specific knowledge base provided yet.'}
-          
-          INSTRUCTIONS:
-          1. ALWAYS prioritize the information provided in the "CRITICAL KNOWLEDGE BASE" above.
-          2. If the answer is in the knowledge base, use it as your primary source.
-          3. If the knowledge base doesn't contain the answer, use your general historical knowledge about Ancient Egypt to provide a helpful response.
-          4. Never use the word "undefined".
-          5. Keep the answer concise but immersive.
-          6. Use a welcoming tone as if you are standing right next to the visitor.
-          7. Respond in the same language as the user's question (Arabic or English).`
-        }
-      });
-      
-      let fullResponse = '';
-      setMessages(prev => [...prev, { role: 'bot', text: '' }]);
-      
-      for await (const chunk of response) {
-        const chunkText = chunk.text;
-        fullResponse += chunkText;
-        setMessages(prev => {
-          const newMessages = [...prev];
-          newMessages[newMessages.length - 1].text = fullResponse;
-          return newMessages;
+        // الخطوة 2: إرسال الـ apiName والـ ID المختار ديناميكياً إلى السيرفر
+        const response = await fetch("http://127.0.0.1:5000/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: userMsg,
+                statue: statueDetails?.apiName, // إرسال apiName مثل amenhotep_ii
+                statue_id: parseInt(activeId),
+            }),
         });
-      }
-    } catch (error) {
-      console.error('AI Error:', error);
-      setMessages(prev => [...prev, { role: 'bot', text: "عذراً، واجهت مشكلة في الاتصال بأرشيف المتحف حالياً. يرجى المحاولة مرة أخرى." }]);
+
+        const data = await response.json();
+        const aiText = data.response || "No response from AI";
+        setMessages(prev => [...prev, { role: 'bot', text: aiText }]);
+
+        const speakRes = await fetch("http://127.0.0.1:5000/speak", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: aiText }),
+        });
+        const speakData = await speakRes.json();
+
+        if (speakData.audio_base64) {
+            if (!audioRef.current) {
+                audioRef.current = new Audio();
+                audioRef.current.crossOrigin = "anonymous";
+            }
+
+            // الخطوة 4: مسح الـ source القديم لمنع تكرار الاتصال بالمتصفح
+            sourceRef.current = null;
+
+            // تعيين ملف الصوت القادم
+            audioRef.current.src = "data:audio/mp3;base64," + speakData.audio_base64;
+
+            // الخطوة 5: إنشاء اتصال جديد دائماً (NEW analyzer connection) لكل رد صوتي جديد
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioContextRef.current = new AudioContext();
+            analyserRef.current = audioContextRef.current.createAnalyser();
+            analyserRef.current.fftSize = 256;
+
+            const source = audioContextRef.current.createMediaElementSource(audioRef.current);
+            source.connect(analyserRef.current);
+            analyserRef.current.connect(audioContextRef.current.destination);
+            sourceRef.current = source; // تخزين الـ source الجديد
+
+            if (audioContextRef.current.state === 'suspended') {
+                await audioContextRef.current.resume();
+            }
+
+            try {
+                setIsTalking(true);
+                // الخطوة 6: تشغيل الصوت وبدء اللوب الخاصة بتحريك الفم (animateMouth) فوراً بعدها
+                await audioRef.current.play();
+
+                // 4. دالة الـ Animation Loop (المسؤولة عن الـ Lipsync)
+                const freqData = new Uint8Array(analyserRef.current.frequencyBinCount);
+                
+                const loop = () => {
+                    if (!audioRef.current || audioRef.current.paused || audioRef.current.ended) {
+                        setIsTalking(false);
+                        return;
+                    }
+
+                    analyserRef.current.getByteFrequencyData(freqData);
+                    const volume = freqData.reduce((a, b) => a + b, 0) / freqData.length;
+                    
+                    const mouth = document.querySelector(`.${styles.mouthOverlay}`);
+                    if (mouth) {
+                        mouth.style.height = `${10 + volume / 4}px`; 
+                        mouth.style.opacity = volume > 5 ? 1 : 0.3;
+                    }
+
+                    requestAnimationFrame(loop);
+                };
+
+                loop();
+
+                // الخطوة 7: عند انتهاء تشغيل الصوت بالكامل، نرجع الفم لوضعه الساكن الأصلي
+                audioRef.current.onended = () => {
+                    setIsTalking(false);
+                    const mouth = document.querySelector(`.${styles.mouthOverlay}`);
+                    if (mouth) {
+                        mouth.style.height = '10px';
+                        mouth.style.opacity = '0.3';
+                    }
+                };
+                
+            } catch (err) {
+                console.error("Audio play failed:", err);
+                setIsTalking(false);
+            }
+        }
+    } catch (err) {
+        console.error("Chat error:", err);
     } finally {
-      setIsTyping(false);
+        setIsTyping(false);
     }
   };
 
@@ -310,12 +357,6 @@ export default function Status() {
     }
   };
 
-  const handleCameraChange = (event) => {
-    const orbit = event.target.getCameraOrbit();
-    const theta = (orbit.theta * 180) / Math.PI;
-    setRotation(Math.round(theta % 360));
-  };
-
   const handleRotateClick = () => {
     const newRotation = (rotation + 30) % 360;
     setRotation(newRotation);
@@ -327,16 +368,12 @@ export default function Status() {
 
   const handleZoomIn = () => {
     setZoom(prev => Math.min(prev + 10, 200));
-    if (modelViewerRef.current) {
-      modelViewerRef.current.zoom(1); // تكبير الحجم (الاقتراب)
-    }
+    if (modelViewerRef.current) modelViewerRef.current.zoom(1);
   };
 
   const handleZoomOut = () => {
     setZoom(prev => Math.max(prev - 10, 50));
-    if (modelViewerRef.current) {
-      modelViewerRef.current.zoom(-1); // تصغير الحجم فعلياً (الابتعاد)
-    }
+    if (modelViewerRef.current) modelViewerRef.current.zoom(-1);
   };
 
   const handleVoiceInput = () => {
@@ -347,12 +384,8 @@ export default function Status() {
     }
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
     if (!SpeechRecognition) {
-      setMessages(prev => [...prev, { 
-        role: 'bot', 
-        text: "عذراً، متصفحك لا يدعم خاصية التعرف على الصوت. 🎙️" 
-      }]);
+      setMessages(prev => [...prev, { role: 'bot', text: "عذراً، متصفحك لا يدعم خاصية التعرف على الصوت. 🎙️" }]);
       return;
     }
 
@@ -365,40 +398,24 @@ export default function Status() {
     recognition.onstart = () => {
       setIsListening(true);
       wasStoppedManually.current = false;
-      transcriptRef.current = question; 
+      transcriptRef.current = ''; 
     };
 
     recognition.onresult = (event) => {
-      let newTranscript = '';
+      let currentTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        newTranscript += event.results[i][0].transcript;
+        currentTranscript += event.results[i][0].transcript;
       }
-      const fullText = transcriptRef.current + (transcriptRef.current ? ' ' : '') + newTranscript;
-      setQuestion(fullText);
-    };
-
-    recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
-      setIsListening(false);
-      wasStoppedManually.current = false;
-      if (event.error !== 'no-speech') {
-        setMessages(prev => [...prev, { 
-          role: 'bot', 
-          text: "حدث خطأ أثناء محاولة تسجيل الصوت. يرجى المحاولة مرة أخرى." 
-        }]);
-      }
+      setQuestion(currentTranscript);
+      transcriptRef.current = currentTranscript;
     };
 
     recognition.onend = () => {
       setIsListening(false);
-      setQuestion(prev => {
-        if (prev.trim()) {
-          handleSendQuestion(prev);
-        }
-        return '';
-      });
+      if (transcriptRef.current.trim() && !wasStoppedManually.current) {
+        handleSendQuestion(transcriptRef.current);
+      }
       wasStoppedManually.current = false;
-      transcriptRef.current = '';
     };
 
     recognition.start();
@@ -408,7 +425,6 @@ export default function Status() {
     <>
       <NavBar />
       <main className={styles.statuesMain}>
-        {/* Collection Header Section (Ticket Booking) */}
         <header className={styles.collectionHeader}>
           <h1 className={styles.collectionTitle}>STATUES COLLECTION</h1>
           <button 
@@ -420,7 +436,6 @@ export default function Status() {
           </button>
         </header>
 
-        {/* Slider Section */}
         <section className={styles.statuesSection}>
           <div ref={sliderRef} className={styles.statuesContainer}>
             {statues.map((statue) => (
@@ -428,42 +443,20 @@ export default function Status() {
                 key={statue.id}
                 onClick={() => setActiveId(statue.id)}
                 className={styles.statueButton}
-                whileHover={activeId === statue.id ? {} : { 
-                  scale: 1.05
-                }}
+                whileHover={activeId === statue.id ? {} : { scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                animate={{ 
-                  scale: activeId === statue.id ? 1.1 : 1,
-                  y: 0
-                }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 500, 
-                  damping: 30
-                }}
+                animate={{ scale: activeId === statue.id ? 1.1 : 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
               >
-                <div
-                  className={`${styles.statueImageWrapper} ${
-                    activeId === statue.id ? styles.statueImageWrapperActive : ''
-                  }`}
-                  style={{
-                    borderWidth: '4px', 
-                  }}
-                >
+                <div className={`${styles.statueImageWrapper} ${activeId === statue.id ? styles.statueImageWrapperActive : ''}`}>
                   <img
                     src={statue.image || '/placeholder.svg'}
                     alt={statue.name}
                     className={styles.statueImage}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => {
-                      e.target.src = `https://picsum.photos/seed/${statue.name}/800/600`;
-                    }}
+                    onError={(e) => { e.target.src = `https://picsum.photos/seed/${statue.name}/800/600`; }}
                   />
                 </div>
-                <span
-                  className={`${styles.statueName} ${activeId === statue.id ? styles.statueNameActive : ''}`}
-                >
+                <span className={`${styles.statueName} ${activeId === statue.id ? styles.statueNameActive : ''}`}>
                   {statue.name}
                 </span>
               </motion.button>
@@ -472,13 +465,10 @@ export default function Status() {
           <div className={styles.statuesAccentLine} />
         </section>
 
-        {/* Content Grid */}
         <section className={styles.contentGrid}>
+          {/* الخطوة 8: الحفاظ على الفم التفاعلي (mouthOverlay) بداخل الـ viewerDisplay تماماً متراكباً فوق الـ 3D Model */}
           <div className={styles.viewerCard}>
-            <div className={styles.viewerHeader}>
-              <h2 className={styles.viewerTitle}>3D Model Viewer</h2>
-            </div>
-
+            <div className={styles.viewerHeader}><h2 className={styles.viewerTitle}>3D Model Viewer</h2></div>
             <div className={styles.viewerDisplay}>
               {statueDetails?.model_3d && !modelError ? (
                 <model-viewer
@@ -489,53 +479,39 @@ export default function Status() {
                   shadow-intensity="1"
                   environment-image="neutral"
                   exposure="1"
-                  loading="lazy"
-                  reveal="auto"
-                  ar
-                  ar-modes="webxr scene-viewer quick-look"
                   interaction-prompt="none"
-                  orbit-sensitivity="2"
-                  damping-factor="0.05"
                   style={{ width: '100%', height: '100%', backgroundColor: '#ffffff' }}
                   camera-orbit={`${rotation}deg 75deg auto`}
                   onError={() => setModelError(true)}
                 ></model-viewer>
-              ) : activeStatue?.image ? (
-                <img
-                  src={activeStatue.image}
-                  alt={activeStatue.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#ffffff' }}
-                  onError={(e) => {
-                    e.target.src = `https://picsum.photos/seed/${activeStatue.name}/800/600`;
-                  }}
-                />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-white p-8 text-center">
-                  <div className="w-12 h-12 border-4 border-[var(--egyptian-gold)] border-t-transparent rounded-full animate-spin mb-4"></div>
-                </div>
+                <img
+                  src={activeStatue?.image}
+                  alt={activeStatue?.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#ffffff' }}
+                  onError={(e) => { e.target.src = `https://picsum.photos/seed/${activeStatue.name}/800/600`; }}
+                />
               )}
               
-              <div className={styles.viewerOverlayTopLeft}>
-                {zoom}%
-              </div>
+              {/* طبقة الفم المتحركة مع التعديل المطلوب لـ CSS الانيميشن عند الحديث */}
+              <div
+                className={styles.mouthOverlay}
+                style={{
+                  animation: isTalking ? 'talk 0.15s infinite alternate' : 'none'
+                }}
+              ></div>
               
-              <div className={styles.viewerOverlayTopRight}>
-                {rotation}°
-              </div>
+              <div className={styles.viewerOverlayTopLeft}>{zoom}%</div>
+              <div className={styles.viewerOverlayTopRight}>{rotation}°</div>
             </div>
 
             <div className={styles.viewerControlsContainer}>
               <div className={styles.viewerActions}>
                 <button className={styles.rotateBtn} onClick={handleRotateClick}>
-                  <RotateCw className="w-3 h-3 mr-1" />
-                  <span>Rotate</span>
+                  <RotateCw className="w-3 h-3 mr-1" /><span>Rotate</span>
                 </button>
-                <button className={styles.zoomBtn} onClick={handleZoomIn}>
-                  <ZoomIn className="w-4 h-4" />
-                </button>
-                <button className={styles.zoomBtn} onClick={handleZoomOut}>
-                  <ZoomOut className="w-4 h-4" />
-                </button>
+                <button className={styles.zoomBtn} onClick={handleZoomIn}><ZoomIn className="w-4 h-4" /></button>
+                <button className={styles.zoomBtn} onClick={handleZoomOut}><ZoomOut className="w-4 h-4" /></button>
               </div>
               <p className={styles.viewerCaption}>Use mouse to rotate and controls to zoom</p>
             </div>
@@ -545,8 +521,7 @@ export default function Status() {
             <div className={styles.chatHeader}>
               <h2 className={styles.chatTitle}>Ask About This Statue</h2>
               <button className={styles.quickFactsBtn} onClick={handleQuickFacts}>
-                <Info className="w-4 h-4" />
-                <span>Quick Facts</span>
+                <Info className="w-4 h-4" /><span>Quick Facts</span>
               </button>
             </div>
 
@@ -555,9 +530,8 @@ export default function Status() {
                 {messages.map((msg, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     className={`${styles.messageWrapper} ${msg.role === 'user' ? styles.userMessageWrapper : styles.botMessageWrapper}`}
                   >
                     <div className={`${styles.chatBubble} ${msg.role === 'user' ? styles.userBubble : ''}`}>
@@ -566,11 +540,7 @@ export default function Status() {
                   </motion.div>
                 ))}
                 {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className={styles.botMessageWrapper}
-                  >
+                  <div className={styles.botMessageWrapper}>
                     <div className={styles.chatBubble}>
                       <div className="flex gap-1">
                         <div className="w-1.5 h-1.5 bg-[var(--egyptian-green)] rounded-full animate-bounce"></div>
@@ -578,7 +548,7 @@ export default function Status() {
                         <div className="w-1.5 h-1.5 bg-[var(--egyptian-green)] rounded-full animate-bounce [animation-delay:0.4s]"></div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
                 <div ref={chatEndRef} />
               </AnimatePresence>
@@ -594,13 +564,10 @@ export default function Status() {
                   onChange={(e) => setQuestion(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendQuestion()}
                 />
-                <button 
-                  className={`${styles.micBtn} ${isListening ? styles.micBtnActive : ''}`} 
-                  onClick={handleVoiceInput}
-                >
+                <button className={`${styles.micBtn} ${isListening ? styles.micBtnActive : ''}`} onClick={handleVoiceInput}>
                   <Mic className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`} />
                 </button>
-                <button className={styles.sendBtn} onClick={handleSendQuestion}>
+                <button className={styles.sendBtn} onClick={() => handleSendQuestion()}>
                   <Send className="w-4 h-4" />
                 </button>
               </div>
@@ -615,9 +582,7 @@ export default function Status() {
               <div className={styles.detailsHeader}>
                 <div>
                   <h2 className={styles.detailsMainTitle}>{statueDetails.fullName || statueDetails.name}</h2>
-                  <p className={styles.detailsSubtitle}>
-                    {statueDetails.dynasty} • {statueDetails.period}
-                  </p>
+                  <p className={styles.detailsSubtitle}>{statueDetails.dynasty} • {statueDetails.period}</p>
                 </div>
                 <div className={styles.detailsTags}>
                   {(statueDetails.tags || []).map((tag, i) => (
@@ -625,25 +590,12 @@ export default function Status() {
                   ))}
                 </div>
               </div>
-
               <div className={styles.infoGrid}>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Material</span>
-                  <span className={styles.infoValue}>{statueDetails.material}</span>
-                </div>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Height</span>
-                  <span className={styles.infoValue}>{statueDetails.height}</span>
-                </div>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Period</span>
-                  <span className={styles.infoValue}>{statueDetails.period}</span>
-                </div>
+                <div className={styles.infoItem}><span className={styles.infoLabel}>Material</span><span className={styles.infoValue}>{statueDetails.material}</span></div>
+                <div className={styles.infoItem}><span className={styles.infoLabel}>Height</span><span className={styles.infoValue}>{statueDetails.height}</span></div>
+                <div className={styles.infoItem}><span className={styles.infoLabel}>Period</span><span className={styles.infoValue}>{statueDetails.period}</span></div>
               </div>
-
-              <p className={styles.detailsDescription}>
-                {statueDetails.description}
-              </p>
+              <p className={styles.detailsDescription}>{statueDetails.description}</p>
             </section>
 
             <section className={styles.quickFactsSection}>
